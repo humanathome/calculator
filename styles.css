@@ -9,7 +9,7 @@
 	width: 350px;
 }
 
-#display {
+#calc-display {
 	font-size: 20px;
 	height: 100px;
 	border: 1px solid;
@@ -25,7 +25,7 @@
 	grid-template-columns: repeat(4, 1fr);
 }
 
-.number, .operation, #clear-entry, #all-clear {
+#buttons-container > * {
 	justify-content: center;
 	align-items: center;
 	border: 1px solid;
@@ -33,7 +33,7 @@
 	font-size: 20px;
 }
 
-.number:hover, .operation:hover, #clear-entry:hover, #all-clear:hover {
+#buttons-container > *:hover {
 	cursor: pointer;
 	background-color: #dddddd;
 }
