@@ -1,12 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="styles.css">
-	<script src="calculator.js"></script>
+	<script src="calculator.js" defer></script>
 	<title>Calculator</title>
 </head>
 <body>
-
+	<div id="main">
+		<div id="calc-wrapper">
+			<div id="display"></div>
+			<div id="buttons-container">
+				<div class="number">1</div>
+				<div class="number">2</div>
+				<div class="number">3</div>
+				<div class="operation" id="add">+</div>
+				<div class="number">4</div>
+				<div class="number">5</div>
+				<div class="number">6</div>
+				<div class="operation" id="subtract">-</div>
+				<div class="number">7</div>
+				<div class="number">8</div>
+				<div class="number">9</div>
+				<div class="operation" id="multiply">*</div>
+				<div class="number">0</div>
+				<div id="clear-entry">DELETE</div>
+				<div id="all-clear">CLEAR</div>
+				<div class="operation" id="divide">/</div>
+				<div class="operation" id="equals">=</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
