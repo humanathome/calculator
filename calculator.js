@@ -1,4 +1,5 @@
 const equalsBtn = document.getElementById('equals');
+const deleteBtn = document.getElementById('clear-entry');
 const clearAllBtn = document.getElementById('clear-all');
 const resultDisplay = document.getElementById('result-display');
 const operatorDisplay = document.getElementById('operator-display');
@@ -84,3 +85,14 @@ function resetResult() {
 
 clearAllBtn.addEventListener('click', resetOperationValues);
 clearAllBtn.addEventListener('click', resetResult);
+
+// 'delete' button functionality
+function deleteNumber() {
+	if (operatorDisplay.innerText === '') {
+		operand1.innerText = operand1.innerText.substring(0, operand1.innerText.length-1);
+	} else {
+		operand2.innerText = operand2.innerText.substring(0, operand2.innerText.length-1);
+	}
+}
+
+deleteBtn.addEventListener('click', deleteNumber);
