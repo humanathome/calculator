@@ -21,10 +21,10 @@ document.querySelectorAll('.number').forEach( num => {
 });
 
 function registerNumber(e) {
-	if (operatorDisplay.textContent === '') {
-		operand1.textContent += e.target.textContent;
+	if (operatorDisplay.innerText === '') {
+		operand1.innerText += e.target.innerText;
 	} else {
-		operand2.textContent += e.target.textContent;
+		operand2.innerText += e.target.innerText;
 	}
 }
 
@@ -32,24 +32,24 @@ equalsBtn.addEventListener('click', operate);
 
 // main function for operations
 function operate(operator, firstNum, secondNum) {
-	operator = operatorDisplay.textContent;
-	firstNum = Number(operand1.textContent);
-	secondNum = Number(operand2.textContent);
+	operator = operatorDisplay.innerText;
+	firstNum = Number(operand1.innerText);
+	secondNum = Number(operand2.innerText);
 	switch (operator) {
 		case "+":
-			resultDisplay.textContent = add(firstNum, secondNum);
+			resultDisplay.innerText = add(firstNum, secondNum);
 			resetOperationValues();
 			break;
 		case "-":
-			resultDisplay.textContent = subtract(firstNum, secondNum);
+			resultDisplay.innerText = subtract(firstNum, secondNum);
 			resetOperationValues();
 			break;
 		case "*":
-			resultDisplay.textContent = multiply(firstNum, secondNum);
+			resultDisplay.innerText = multiply(firstNum, secondNum);
 			resetOperationValues();
 			break;
 		case "/":
-			resultDisplay.textContent = divide(firstNum, secondNum);
+			resultDisplay.innerText = divide(firstNum, secondNum);
 			resetOperationValues();
 			break;
 	}
@@ -73,13 +73,13 @@ function divide(num1, num2) {
 
 // reset operands, operator and results
 function resetOperationValues() {
-	operatorDisplay.textContent = '';
-	operand1.textContent = '';
-	operand2.textContent = '';
+	operatorDisplay.innerText = '';
+	operand1.innerText = '';
+	operand2.innerText = '';
 }
 
 function resetResult() {
-	resultDisplay.textContent = '';
+	resultDisplay.innerText = '';
 }
 
 clearAllBtn.addEventListener('click', resetOperationValues);
