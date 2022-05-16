@@ -1,15 +1,23 @@
 const equalsBtn = document.getElementById('equals');
 const deleteBtn = document.getElementById('clear-entry');
 const clearAllBtn = document.getElementById('clear-all');
+
+const operatorDisplay = document.getElementById('current-operator-display');
+const equalsSignDisplay = document.getElementById('equals-sign-display');
 const resultDisplay = document.getElementById('result-display');
-const operatorDisplay = document.getElementById('operator-display');
+
+const operand1Old = document.getElementById('operand1-old');
+const operatorDisplayOld = document.getElementById('operator-display-old');
+const operand2Old = document.getElementById('operand2-old');
 
 let operand1 = document.getElementById('operand1');
 let operand2 = document.getElementById('operand2');
 
 // register operator on click
 function registerOperator() {
+	if (operatorDisplay.innerText !== '') operate();
 	operatorDisplay.innerText = this.innerText;
+	
 }
 
 document.querySelectorAll('.operation').forEach(btn => {
@@ -33,27 +41,39 @@ equalsBtn.addEventListener('click', operate);
 
 // main function for operations
 function operate(operator, firstNum, secondNum) {
+	if (operand2.innerText === '') return
 	operator = operatorDisplay.innerText;
 	firstNum = Number(operand1.innerText);
 	secondNum = Number(operand2.innerText);
+	
 	switch (operator) {
 		case "+":
+			equalsSignDisplay.innerText = "=";
 			resultDisplay.innerText = add(firstNum, secondNum);
-			resetOperationValues();
 			break;
 		case "-":
+			equalsSignDisplay.innerText = "=";
 			resultDisplay.innerText = subtract(firstNum, secondNum);
-			resetOperationValues();
 			break;
 		case "*":
+			equalsSignDisplay.innerText = "=";
 			resultDisplay.innerText = multiply(firstNum, secondNum);
-			resetOperationValues();
 			break;
 		case "/":
+			equalsSignDisplay.innerText = "=";
 			resultDisplay.innerText = divide(firstNum, secondNum);
-			resetOperationValues();
 			break;
 	}
+	prepareForNewOperation();
+}
+
+function prepareForNewOperation() {
+	operand1Old.innerText = operand1.innerText;
+	operatorDisplayOld.innerText = operatorDisplay.innerText;
+	operand2Old.innerText = operand2.innerText;
+	operand1.innerText = resultDisplay.innerText;
+	operand2.innerText = '';
+	operatorDisplay.innerText = '';
 }
 
 function add(num1, num2) {
@@ -75,16 +95,16 @@ function divide(num1, num2) {
 // reset operands, operator and results
 function resetOperationValues() {
 	operatorDisplay.innerText = '';
+	operatorDisplayOld.innerText = '';
 	operand1.innerText = '';
 	operand2.innerText = '';
-}
-
-function resetResult() {
+	operand1Old.innerText = '';
+	operand2Old.innerText = '';
 	resultDisplay.innerText = '';
+	equalsSignDisplay.innerText = '';
 }
 
 clearAllBtn.addEventListener('click', resetOperationValues);
-clearAllBtn.addEventListener('click', resetResult);
 
 // 'delete' button functionality
 function deleteNumber() {
