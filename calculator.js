@@ -1,6 +1,14 @@
 const equalsBtn = document.getElementById('equals');
 const deleteBtn = document.getElementById('clear-entry');
 const clearAllBtn = document.getElementById('clear-all');
+const decimalSeparatorBtn = document.getElementById('decimal-separator');
+
+function addDecimalSeparator() {
+	(operatorDisplay.innerText === '') ? operand1.innerText += '.' : operand2.innerText += '.';
+	decimalSeparatorBtn.style.pointerEvents = 'none';
+}
+
+decimalSeparatorBtn.addEventListener('click', addDecimalSeparator);
 
 const oldValuesContainer = document.getElementById('old-values-container');
 const operatorDisplay = document.getElementById('operator-display');
@@ -13,6 +21,7 @@ let result = '';
 function registerOperator() {
 	if (operatorDisplay.innerText !== '') operate();
 	operatorDisplay.innerText = this.innerText;
+	decimalSeparatorBtn.style.pointerEvents = 'all';
 }
 
 document.querySelectorAll('.operation').forEach(btn => {
