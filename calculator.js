@@ -19,6 +19,7 @@ let result = '';
 
 // register operator on click
 function registerOperator() {
+	if (isNaN(operand1.innerText)) return;
 	if (operatorDisplay.innerText !== '') operate();
 	operatorDisplay.innerText = this.innerText;
 	decimalSeparatorBtn.style.pointerEvents = 'all';
@@ -30,6 +31,7 @@ document.querySelectorAll('.operation').forEach(btn => {
 
 // add event listeners to all the number buttons
 function registerNumber(e) {
+	if (isNaN(operand1.innerText)) resetOperationValues();
 	if (operatorDisplay.innerText === '') {
 		operand1.innerText += e.target.innerText;
 	} else {
@@ -64,6 +66,12 @@ function operate(operator, firstNum, secondNum) {
 			oldValuesContainer.textContent = `${firstNum} * ${secondNum} = `;
 			break;
 		case "/":
+			if (secondNum === 0) {
+				result = "Only Chuck Norris can divide by zero.";
+				oldValuesContainer.textContent = `${firstNum} / ${secondNum} = `;
+				prepareForNewOperation();
+				return;
+			}
 			result = firstNum / secondNum;
 			oldValuesContainer.textContent = `${firstNum} / ${secondNum} = `;
 			break;
