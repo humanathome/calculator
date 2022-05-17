@@ -11,15 +11,20 @@ This is the [final project](https://www.theodinproject.com/lessons/foundations-c
 
 ### Things to watch out for
 
-- calculator should not evaluate more than a single pair of numbers at a time. Users should be able to string together 
-several operations and get the right answer
+- **calculator should not evaluate more than a single pair of numbers at a time**. Users should be able to string together 
+several operations and get the right answer. `12 + 7 - 5 * 3 =` should yield `42`. Example: you press a number 
+button (`12`), followed by an operator button (`+`), a second number button (`7`), and finally a second operator button (`-`).
+Your calculator should then do the following: first, evaluate the first pair of numbers (`12 + 7`), second, display the 
+result of that calculation (`19`), and finally, use that result (`19`) as the first number in your new calculation, along 
+with the next operator (`-`).
 - be sure to round answers with long decimals so that they don’t overflow the screen
 - pressing `=` before entering all of the numbers or an operator could cause problems
 - division by 0
 - pressing `clear` should wipe out any existing data
 
 ### Extra credit
-- add decimal numbers support
+- add decimal numbers support and make sure to disable the decimal button if there’s already one decimal separator in 
+the display
 - add 'backspace' button
 - add keyboard support
 - add CSS styling
