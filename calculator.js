@@ -4,8 +4,8 @@ const clearAllBtn = document.getElementById('clear-all');
 const decimalSeparatorBtn = document.getElementById('decimal-separator');
 
 function addDecimalSeparator() {
+	if (operand1.innerText.includes('.') || operand2.innerText.includes('.')) return;
 	(operatorDisplay.innerText === '') ? operand1.innerText += '.' : operand2.innerText += '.';
-	decimalSeparatorBtn.style.pointerEvents = 'none';
 }
 
 decimalSeparatorBtn.addEventListener('click', addDecimalSeparator);
@@ -18,11 +18,10 @@ let operand2 = document.getElementById('operand2');
 let result = '';
 
 // register operator on click
-function registerOperator() {
+function registerOperator(e) {
 	if (isNaN(operand1.innerText)) return;
 	if (operatorDisplay.innerText !== '') operate();
-	operatorDisplay.innerText = this.innerText;
-	decimalSeparatorBtn.style.pointerEvents = 'all';
+	operatorDisplay.innerText = e.type === 'click' ? this.innerText : e.key;
 }
 
 document.querySelectorAll('.operation').forEach(btn => {
@@ -42,6 +41,24 @@ function registerNumber(e) {
 document.querySelectorAll('.number').forEach( num => {
 	num.addEventListener('click', registerNumber);
 });
+
+// Add keyboard support
+function keyboard(e) {
+	if (isNaN(operand1.innerText)) resetOperationValues();
+	
+	if (e.key >= 0 && e.key <= 9) {
+		if (operatorDisplay.innerText === '') {
+			operand1.innerText += e.key;
+		} else if (operatorDisplay.innerText !== '') {
+			operand2.innerText += e.key;
+		}
+	}
+	if (e.key === '.') addDecimalSeparator();
+	if (e.key === '+' || e.key === '-' || e.key === '/' || e.key === '*') registerOperator(e);
+	if (e.key === '=' || e.key === 'Enter') operate(e);
+	if (e.key === 'Backspace') deleteNumber();
+}
+document.addEventListener('keydown', keyboard);
 
 equalsBtn.addEventListener('click', operate);
 
