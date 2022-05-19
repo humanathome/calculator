@@ -4,8 +4,13 @@ const clearAllBtn = document.getElementById('clear-all');
 const decimalSeparatorBtn = document.getElementById('decimal-separator');
 
 function addDecimalSeparator() {
-	if (operand1.innerText.includes('.') || operand2.innerText.includes('.')) return;
-	(operatorDisplay.innerText === '') ? operand1.innerText += '.' : operand2.innerText += '.';
+	if (operatorDisplay.innerText === '') {
+		if (operand1.innerText.includes('.')) return;
+		operand1.innerText += '.'
+	} else {
+		if (operand2.innerText.includes('.')) return;
+		operand2.innerText += '.';
+	}
 }
 
 decimalSeparatorBtn.addEventListener('click', addDecimalSeparator);
