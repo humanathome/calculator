@@ -35,7 +35,7 @@ document.querySelectorAll('.operation').forEach(btn => {
 
 // add event listeners to all the number buttons
 function registerNumber(e) {
-	if (isNaN(operand1.innerText)) resetOperationValues();
+	if (isNaN(operand1.innerText) && operand1.innerText.length > 1) resetOperationValues();
 	if (operatorDisplay.innerText === '') {
 		operand1.innerText += e.target.innerText;
 	} else {
