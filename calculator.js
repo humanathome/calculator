@@ -2,6 +2,24 @@ const equalsBtn = document.getElementById('equals');
 const deleteBtn = document.getElementById('clear-entry');
 const clearAllBtn = document.getElementById('clear-all');
 const decimalSeparatorBtn = document.getElementById('decimal-separator');
+const negativeNumBtn = document.getElementById('toggle-negative-number');
+
+function toggleNegativeNumber() {
+	if (operatorDisplay.innerText === '') {
+		if (operand1.innerText.includes('-')) {
+			operand1.innerText = operand1.innerText.substring(1);
+		} else {
+			operand1.innerText = '-' + operand1.innerText;
+		}
+	} else {
+		if (operand2.innerText.includes('-')) {
+			operand2.innerText = operand2.innerText.substring(1);
+		} else {
+			operand2.innerText = '-' + operand2.innerText;
+		}
+	}
+}
+negativeNumBtn.addEventListener('click', toggleNegativeNumber);
 
 function addDecimalSeparator() {
 	if (operatorDisplay.innerText === '') {
