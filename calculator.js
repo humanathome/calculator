@@ -76,15 +76,15 @@ function operate(operator, firstNum, secondNum) {
 	
 	switch (operator) {
 		case "+":
-			result = firstNum + secondNum;
+			result = Math.round((firstNum + secondNum) * 100) / 100;
 			oldValuesContainer.textContent = `${firstNum} + ${secondNum} = `;
 			break;
 		case "-":
-			result = firstNum - secondNum;
+			result = Math.round((firstNum - secondNum) * 100) / 100;
 			oldValuesContainer.textContent = `${firstNum} - ${secondNum} = `;
 			break;
 		case "*":
-			result = firstNum * secondNum;
+			result = Math.round((firstNum * secondNum) * 100) / 100;
 			oldValuesContainer.textContent = `${firstNum} * ${secondNum} = `;
 			break;
 		case "/":
@@ -94,7 +94,7 @@ function operate(operator, firstNum, secondNum) {
 				prepareForNewOperation();
 				return;
 			}
-			result = firstNum / secondNum;
+			result = Math.round((firstNum / secondNum) * 100) / 100;
 			oldValuesContainer.textContent = `${firstNum} / ${secondNum} = `;
 			break;
 	}
