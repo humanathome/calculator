@@ -39,6 +39,11 @@ function registerNumber(e) {
 
 function registerOperator(e) {
 	if (isNaN(+operand1.innerText)) return;
+	if (operatorDisplay.innerText === '/' && Math.abs(operand2.innerText) === 0) {
+		resetAllValues();
+		alert("Only Chuck Norris can divide by zero.");
+		return;
+	}
 	if (operatorDisplay.innerText !== '')  operate();
 	operatorDisplay.innerText = e.type === 'click' ? this.innerText : e.key;
 }
@@ -103,7 +108,7 @@ function operate(operator, firstNum, secondNum) {
 	operator = operatorDisplay.innerText;
 	firstNum = Number(operand1.innerText);
 	secondNum = Number(operand2.innerText);
-
+	
 	switch (operator) {
 		case "+":
 			result = Math.round((firstNum + secondNum) * 100) / 100;
@@ -118,10 +123,10 @@ function operate(operator, firstNum, secondNum) {
 			oldValuesDisplay.textContent = `${firstNum} * ${secondNum} = `;
 			break;
 		case "/":
-			if (secondNum === 0) {
-				result = "Only Chuck Norris can divide by zero.";
-				oldValuesDisplay.textContent = `${firstNum} / ${secondNum} = `;
-				break;
+			if (Math.abs(operand2.innerText) === 0) {
+				resetAllValues();
+				alert("Only Chuck Norris can divide by zero.");
+				return;
 			}
 			result = Math.round((firstNum / secondNum) * 100) / 100;
 			oldValuesDisplay.textContent = `${firstNum} / ${secondNum} = `;
