@@ -4,7 +4,56 @@ const clearAllBtn = document.getElementById('clear-all');
 const decimalSeparatorBtn = document.getElementById('decimal-separator');
 const negativeNumBtn = document.getElementById('toggle-negative-number');
 
+const oldValuesDisplay = document.getElementById('old-values-display');
+const operatorDisplay = document.getElementById('operator-display');
+
+const operand1 = document.getElementById('operand1');
+const operand2 = document.getElementById('operand2');
+let result = '';
+
+// event listeners
+document.querySelectorAll('.number').forEach( num => {
+	num.addEventListener('click', registerNumber);
+});
+
+document.querySelectorAll('.operator').forEach(btn => {
+	btn.addEventListener('click', registerOperator);
+});
+
+negativeNumBtn.addEventListener('click', toggleNegativeNumber);
+decimalSeparatorBtn.addEventListener('click', addDecimalSeparator);
+deleteBtn.addEventListener('click', deleteNumber);
+equalsBtn.addEventListener('click', operate);
+clearAllBtn.addEventListener('click', resetAllValues);
+document.addEventListener('keydown', registerKeyboardInput);
+
+// input functions
+function registerNumber(e) {
+	if (isNaN(+operand1.innerText) && operand1.innerText.length > 1) resetAllValues();
+	if (operatorDisplay.innerText === '') {
+		operand1.innerText += e.target.innerText;
+	} else {
+		operand2.innerText += e.target.innerText;
+	}
+}
+
+function registerOperator(e) {
+	if (isNaN(+operand1.innerText)) return;
+	if (operatorDisplay.innerText !== '')  operate();
+	operatorDisplay.innerText = e.type === 'click' ? this.innerText : e.key;
+}
+
+function deleteNumber() {
+	if (isNaN(+operand1.innerText)) return;
+	if (operatorDisplay.innerText === '') {
+		operand1.innerText = operand1.innerText.slice(0, -1);
+	} else {
+		operand2.innerText = operand2.innerText.slice(0, -1);
+	}
+}
+
 function toggleNegativeNumber() {
+	if (isNaN(+operand1.innerText)) return;
 	if (operatorDisplay.innerText === '') {
 		if (operand1.innerText.includes('-')) {
 			operand1.innerText = operand1.innerText.substring(1);
@@ -19,56 +68,22 @@ function toggleNegativeNumber() {
 		}
 	}
 }
-negativeNumBtn.addEventListener('click', toggleNegativeNumber);
 
 function addDecimalSeparator() {
+	if (isNaN(+operand1.innerText)) return;
 	if (operatorDisplay.innerText === '') {
 		if (operand1.innerText.includes('.')) return;
+		if (operand1.innerText === '') operand1.innerText += '0';
 		operand1.innerText += '.'
 	} else {
 		if (operand2.innerText.includes('.')) return;
+		if (operand2.innerText === '') operand2.innerText += '0';
 		operand2.innerText += '.';
 	}
 }
 
-decimalSeparatorBtn.addEventListener('click', addDecimalSeparator);
-
-const oldValuesContainer = document.getElementById('old-values-container');
-const operatorDisplay = document.getElementById('operator-display');
-
-let operand1 = document.getElementById('operand1');
-let operand2 = document.getElementById('operand2');
-let result = '';
-
-// register operator on click
-function registerOperator(e) {
-	if (isNaN(operand1.innerText)) return;
-	if (operatorDisplay.innerText !== '') operate();
-	operatorDisplay.innerText = e.type === 'click' ? this.innerText : e.key;
-}
-
-document.querySelectorAll('.operation').forEach(btn => {
-	btn.addEventListener('click', registerOperator);
-});
-
-// add event listeners to all the number buttons
-function registerNumber(e) {
-	if (isNaN(operand1.innerText) && operand1.innerText.length > 1) resetOperationValues();
-	if (operatorDisplay.innerText === '') {
-		operand1.innerText += e.target.innerText;
-	} else {
-		operand2.innerText += e.target.innerText;
-	}
-}
-
-document.querySelectorAll('.number').forEach( num => {
-	num.addEventListener('click', registerNumber);
-});
-
-// Add keyboard support
-function keyboard(e) {
-	if (isNaN(operand1.innerText)) resetOperationValues();
-	
+function registerKeyboardInput(e) {
+	if (isNaN(+operand1.innerText)) return;
 	if (e.key >= 0 && e.key <= 9) {
 		if (operatorDisplay.innerText === '') {
 			operand1.innerText += e.key;
@@ -78,42 +93,38 @@ function keyboard(e) {
 	}
 	if (e.key === '.') addDecimalSeparator();
 	if (e.key === '+' || e.key === '-' || e.key === '/' || e.key === '*') registerOperator(e);
-	if (e.key === '=' || e.key === 'Enter') operate(e);
+	if (e.key === '=' || e.key === 'Enter') operate();
 	if (e.key === 'Backspace') deleteNumber();
 }
-document.addEventListener('keydown', keyboard);
 
-equalsBtn.addEventListener('click', operate);
-
-// main function for operations
+// main function for math operations
 function operate(operator, firstNum, secondNum) {
-	if (operand2.innerText === '') return
+	if (operand2.innerText === '') return;
 	operator = operatorDisplay.innerText;
 	firstNum = Number(operand1.innerText);
 	secondNum = Number(operand2.innerText);
-	
+
 	switch (operator) {
 		case "+":
 			result = Math.round((firstNum + secondNum) * 100) / 100;
-			oldValuesContainer.textContent = `${firstNum} + ${secondNum} = `;
+			oldValuesDisplay.textContent = `${firstNum} + ${secondNum} = `;
 			break;
 		case "-":
 			result = Math.round((firstNum - secondNum) * 100) / 100;
-			oldValuesContainer.textContent = `${firstNum} - ${secondNum} = `;
+			oldValuesDisplay.textContent = `${firstNum} - ${secondNum} = `;
 			break;
 		case "*":
 			result = Math.round((firstNum * secondNum) * 100) / 100;
-			oldValuesContainer.textContent = `${firstNum} * ${secondNum} = `;
+			oldValuesDisplay.textContent = `${firstNum} * ${secondNum} = `;
 			break;
 		case "/":
 			if (secondNum === 0) {
 				result = "Only Chuck Norris can divide by zero.";
-				oldValuesContainer.textContent = `${firstNum} / ${secondNum} = `;
-				prepareForNewOperation();
-				return;
+				oldValuesDisplay.textContent = `${firstNum} / ${secondNum} = `;
+				break;
 			}
 			result = Math.round((firstNum / secondNum) * 100) / 100;
-			oldValuesContainer.textContent = `${firstNum} / ${secondNum} = `;
+			oldValuesDisplay.textContent = `${firstNum} / ${secondNum} = `;
 			break;
 	}
 	prepareForNewOperation();
@@ -125,23 +136,9 @@ function prepareForNewOperation() {
 	operand2.innerText = '';
 }
 
-// reset operands, operator and results
-function resetOperationValues() {
+function resetAllValues() {
 	operand1.innerText = '';
 	operatorDisplay.innerText = '';
 	operand2.innerText = '';
-	oldValuesContainer.innerText = '';
+	oldValuesDisplay.innerText = '';
 }
-
-clearAllBtn.addEventListener('click', resetOperationValues);
-
-// 'delete' button functionality
-function deleteNumber() {
-	if (operatorDisplay.innerText === '') {
-		operand1.innerText = operand1.innerText.substring(0, operand1.innerText.length-1);
-	} else {
-		operand2.innerText = operand2.innerText.substring(0, operand2.innerText.length-1);
-	}
-}
-
-deleteBtn.addEventListener('click', deleteNumber);

@@ -9,7 +9,7 @@
 	width: 350px;
 }
 
-#old-values-container {
+#old-values-display {
 	display: flex;
 	gap: 5px;
 	height: 50px;
@@ -19,7 +19,7 @@
 	justify-content: flex-end;
 }
 
-#current-values-container {
+#current-values-display {
 	display: flex;
 	gap: 5px;
 	height: 60px;
