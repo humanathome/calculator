@@ -20,13 +20,16 @@
 }
 
 #current-values-display {
-	display: flex;
-	gap: 5px;
 	height: 60px;
 	border: 1px solid;
 	font-size: 20px;
 	background-color: #ffcbb9;
-	justify-content: flex-end;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+#current-values-display > * {
+	display: inline-block;
 }
 
 #buttons-container {
