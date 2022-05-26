@@ -35,6 +35,7 @@ function registerNumber(e) {
 	} else {
 		operand2.innerText += e.target.innerText;
 	}
+	e.target.blur();
 }
 
 function registerOperator(e) {
@@ -46,6 +47,7 @@ function registerOperator(e) {
 	}
 	if (operatorDisplay.innerText !== '')  operate();
 	operatorDisplay.innerText = e.type === 'click' ? this.innerText : e.key;
+	e.target.blur();
 }
 
 function deleteNumber() {
@@ -55,6 +57,7 @@ function deleteNumber() {
 	} else {
 		operand2.innerText = operand2.innerText.slice(0, -1);
 	}
+	this.blur();
 }
 
 function toggleNegativeNumber() {
@@ -72,6 +75,7 @@ function toggleNegativeNumber() {
 			operand2.innerText = '-' + operand2.innerText;
 		}
 	}
+	this.blur();
 }
 
 function addDecimalSeparator() {
@@ -85,6 +89,7 @@ function addDecimalSeparator() {
 		if (operand2.innerText === '') operand2.innerText += '0';
 		operand2.innerText += '.';
 	}
+	this.blur();
 }
 
 function registerKeyboardInput(e) {
@@ -104,6 +109,7 @@ function registerKeyboardInput(e) {
 
 // main function for math operations
 function operate(operator, firstNum, secondNum) {
+	this.blur();
 	if (operand2.innerText === '') return;
 	operator = operatorDisplay.innerText;
 	firstNum = Number(operand1.innerText);
@@ -146,4 +152,5 @@ function resetAllValues() {
 	operatorDisplay.innerText = '';
 	operand2.innerText = '';
 	oldValuesDisplay.innerText = '';
+	this.blur();
 }
