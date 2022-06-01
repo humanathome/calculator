@@ -51,13 +51,13 @@ function registerOperator(e) {
 }
 
 function deleteNumber() {
-	if (operand1.innerText === '0') return;
+	if (operand1.innerText === '0') {
+		this.blur()
+		return;
+	}
 	if (operatorDisplay.innerText === '') {
-		if (operand1.innerText.length === 0) {
-			operand1.innerText = '0';
-			return;
-		}
 		operand1.innerText = operand1.innerText.slice(0, -1);
+		if (operand1.innerText.length === 0) operand1.innerText = '0';
 	} else {
 		operand2.innerText = operand2.innerText.slice(0, -1);
 	}
