@@ -29,7 +29,7 @@ document.addEventListener('keydown', registerKeyboardInput);
 
 // input functions
 function registerNumber(e) {
-	if (isNaN(+operand1.innerText) && operand1.innerText.length > 1) resetAllValues();
+	if (operand1.innerText === '0') operand1.innerText = '';
 	if (operatorDisplay.innerText === '') {
 		operand1.innerText += e.target.innerText;
 	} else {
@@ -39,7 +39,6 @@ function registerNumber(e) {
 }
 
 function registerOperator(e) {
-	if (isNaN(+operand1.innerText)) return;
 	if (operatorDisplay.innerText === '/' && Math.abs(operand2.innerText) === 0) {
 		resetAllValues();
 		alert("Only Chuck Norris can divide by zero.");
@@ -51,8 +50,12 @@ function registerOperator(e) {
 }
 
 function deleteNumber() {
-	if (isNaN(+operand1.innerText)) return;
+	if (operand1.innerText === '0') return;
 	if (operatorDisplay.innerText === '') {
+		if (operand1.innerText.length === 0) {
+			operand1.innerText = '0';
+			return;
+		}
 		operand1.innerText = operand1.innerText.slice(0, -1);
 	} else {
 		operand2.innerText = operand2.innerText.slice(0, -1);
@@ -61,7 +64,6 @@ function deleteNumber() {
 }
 
 function toggleNegativeNumber() {
-	if (isNaN(+operand1.innerText)) return;
 	if (operatorDisplay.innerText === '') {
 		if (operand1.innerText.includes('-')) {
 			operand1.innerText = operand1.innerText.substring(1);
@@ -79,7 +81,6 @@ function toggleNegativeNumber() {
 }
 
 function addDecimalSeparator() {
-	if (isNaN(+operand1.innerText)) return;
 	if (operatorDisplay.innerText === '') {
 		if (operand1.innerText.includes('.')) return;
 		if (operand1.innerText === '') operand1.innerText += '0';
@@ -93,7 +94,7 @@ function addDecimalSeparator() {
 }
 
 function registerKeyboardInput(e) {
-	if (isNaN(+operand1.innerText)) return;
+	if (operand1.innerText === '0') operand1.innerText = '';
 	if (e.key >= 0 && e.key <= 9) {
 		if (operatorDisplay.innerText === '') {
 			operand1.innerText += e.key;
@@ -148,7 +149,7 @@ function prepareForNewOperation() {
 }
 
 function resetAllValues() {
-	operand1.innerText = '';
+	operand1.innerText = '0';
 	operatorDisplay.innerText = '';
 	operand2.innerText = '';
 	oldValuesDisplay.innerText = '';
