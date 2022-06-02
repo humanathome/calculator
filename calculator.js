@@ -39,7 +39,7 @@ function registerNumber(e) {
 }
 
 function registerOperator(e) {
-	if (operatorDisplay.innerText === '/' && Math.abs(operand2.innerText) === 0) {
+	if (operatorDisplay.innerText === '/' && operand2.innerText !== '' && Math.abs(operand2.innerText) === 0) {
 		resetAllValues();
 		alert("Only Chuck Norris can divide by zero.");
 		e.target.blur();
