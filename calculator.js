@@ -45,6 +45,7 @@ function registerOperator(e) {
 		e.target.blur();
 		return;
 	}
+	if (operand1.innerText[operand1.innerText.length-1] === '.') operand1.innerText = operand1.innerText.slice(0,-1);
 	if (operatorDisplay.innerText !== '')  operate();
 	operatorDisplay.innerText = e.type === 'click' ? this.innerText : e.key;
 	e.target.blur();
@@ -93,7 +94,7 @@ function addDecimalSeparator() {
 			this.blur();
 			return;
 		}
-		if (operand2.innerText === '') operand2.innerText = '0.';
+		if (operand2.innerText === '') operand2.innerText = '0';
 		operand2.innerText += '.';
 	}
 	this.blur();
