@@ -29,8 +29,8 @@ document.addEventListener('keydown', registerKeyboardInput);
 
 // input functions
 function registerNumber(e) {
-	if (operand1.innerText === '0') operand1.innerText = '';
 	if (operatorDisplay.innerText === '') {
+		if (operand1.innerText === '0') operand1.innerText = '';
 		operand1.innerText += e.target.innerText;
 	} else {
 		operand2.innerText += e.target.innerText;
