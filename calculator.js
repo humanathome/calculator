@@ -116,12 +116,12 @@ function registerKeyboardInput(e) {
 }
 
 // main function for math operations
-function operate(operator, firstNum, secondNum) {
+function operate() {
 	this.blur();
 	if (operand2.innerText === '') return;
-	operator = operatorDisplay.innerText;
-	firstNum = Number(operand1.innerText);
-	secondNum = Number(operand2.innerText);
+	let operator = operatorDisplay.innerText;
+	let firstNum = Number(operand1.innerText);
+	let secondNum = Number(operand2.innerText);
 	
 	switch (operator) {
 		case "+":
