@@ -101,9 +101,9 @@ function addDecimalSeparator() {
 }
 
 function registerKeyboardInput(e) {
-	if (operand1.innerText === '0') operand1.innerText = '';
 	if (e.key >= 0 && e.key <= 9) {
 		if (operatorDisplay.innerText === '') {
+			if (operand1.innerText === '0') operand1.innerText = '';
 			operand1.innerText += e.key;
 		} else if (operatorDisplay.innerText !== '') {
 			operand2.innerText += e.key;
