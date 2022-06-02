@@ -83,12 +83,17 @@ function toggleNegativeNumber() {
 
 function addDecimalSeparator() {
 	if (operatorDisplay.innerText === '') {
-		if (operand1.innerText.includes('.')) return;
-		if (operand1.innerText === '') operand1.innerText += '0';
-		operand1.innerText += '.'
+		if (operand1.innerText.includes('.')) {
+			this.blur();
+			return;
+		}
+		operand1.innerText += '.';
 	} else {
-		if (operand2.innerText.includes('.')) return;
-		if (operand2.innerText === '') operand2.innerText += '0';
+		if (operand2.innerText.includes('.')) {
+			this.blur();
+			return;
+		}
+		if (operand2.innerText === '') operand2.innerText = '0.';
 		operand2.innerText += '.';
 	}
 	this.blur();
