@@ -17,13 +17,17 @@ body {
 }
 
 #old-values-display {
-	height: 80px;
-	font-size: 20px;
+	height: 35px;
+	margin-top: 20px;
+	font-size: 25px;
+	color: #a9a9a9;
+	padding: 20px;
 }
 
 #current-values-display {
-	height: 80px;
+	height: 60px;
 	font-size: 40px;
+	padding: 20px;
 	overflow-x: auto;
 	white-space: nowrap;
 }
