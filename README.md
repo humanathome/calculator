@@ -30,3 +30,10 @@ the display
 - add 'backspace' button
 - add keyboard support
 - add CSS styling
+
+### Final result
+- finished all the assignments
+- added horizontal scrollbar to calculator display, for when user inputs long numbers
+- design was (heavily) inspired by iOS calculator app
+
+Live preview: https://humanathome.github.io/calculator/
