@@ -33,7 +33,7 @@ body {
 }
 
 #current-values-display > * {
-	display: inline-block;
+	display: inline;
 }
 
 #buttons-container {
