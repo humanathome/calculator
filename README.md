@@ -32,7 +32,7 @@ the display
 - add CSS styling
 
 ### Final result
-- finished all the assignments
+- finished all the assignments (including the extra credit)
 - added horizontal scrollbar to calculator display, for when user inputs long numbers
 - design was (heavily) inspired by iOS calculator app
 
