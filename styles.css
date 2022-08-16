@@ -26,9 +26,10 @@ body {
 
 #current-values-display {
 	height: 60px;
-	font-size: 40px;
+	font-size: 50px;
 	padding: 20px;
 	overflow-x: auto;
+	overflow-y: hidden;
 	white-space: nowrap;
 }
 
